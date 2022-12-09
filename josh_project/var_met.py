@@ -2,7 +2,7 @@ import numpy as np
 import math
 
 PI_3_2 = math.pi ** 1.5
-N = 4 #number of terms used in expansion
+N = 6 #number of terms used in expansion
 
 ALPHA_LEARNING_RATE = 0.1
 COEFF_LEARNING_RATE = 0.1
@@ -60,13 +60,15 @@ def step(c, a):
     c -= gradients_c
     return c, a
 
-start_alphas = np.random.rand(N)#np.array([13.00773, 1.962079, 0.444529, 0.1219492], dtype=np.float64)
+"""start_alphas = np.random.rand(N)#np.array([13.00773, 1.962079, 0.444529, 0.1219492], dtype=np.float64)
 start_coeffs = np.random.rand(N)#np.array([1, 1, 1, 1, dtype=np.float64)
 c = start_coeffs
-a = start_alphas
-for i in range(100001):
+a = start_alphas"""
+c = np.array([0.82756178, 0.83292796, 0.32551525, 0.53784354, 0.25101611, 0.14072509])
+a = np.array([0.76627919, 0.57237301, 0.77900288, 0.09414339, 0.98226739, 0.87722718])
+for i in range(10 ** 4):
     c, a = step(c, a)
-    if i % 10000 == 0:
+    if i % (10 ** 3) == 0:
         print(c, a, calc_composite_E(c, a))
 print("Normalizing:")
 c /= math.sqrt(calc_norm(c, a))
